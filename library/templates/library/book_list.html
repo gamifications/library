@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">{% if return %}My Books{% else %}Books in Library{% endif %}</li>
+  </ol>
+</nav>
+<div class="row">
+{% for book in object_list %}
+  <div class="col-sm-6">
+	<div class="card mb-3">
+	  <div class="row no-gutters">
+	    <div class="col-md-4">
+	      <img src="{{ book.pic.url }}" class="card-img-top" alt="{{ book.title }}">
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h6 class="card-title">{{ book.title }}</h6>
+	    	<small>{{book.author}}</small><br>
+		    <p class="text-muted"><small>{{ book.summary|truncatechars:50}}</small></p>
+		    <!-- <p class="lead">{{ book.available_copies}}</p> -->
+		    {% if return %}
+		    <a href="{% url 'library:check_in' pk=book.id %}" class="btn btn-danger">Return Book</a>
+		    {% else %}
+		    <a href="{% url 'library:check_out' pk=book.id %}" class="btn btn-primary">Borrow Book</a>
+		    {% endif %}
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+
+{% empty %}
+	<div class="col-sm-4"><p class=" bg bg-white">There are no books.</p>  </div>
+{% endfor %}
+</div>
+{% endblock %}

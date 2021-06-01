@@ -6,11 +6,11 @@
 
 Features:
 + [x] User can login to the system
-+ [ ] User can borrow a book (check out)
-+ [ ] User can return a book (check in)
-+ [ ] If a book is no longer available because it has been checked out, please display a validation error.
-+ [ ] If the book is available for checkout, please display a success message when the book is successfully checked out.
-+ [ ] Write a fixture for loading up several books.
++ [x] User can borrow a book (check out)
++ [x] User can return a book (check in)
++ [x] If a book is no longer available because it has been checked out, please display a validation error.
++ [x] If the book is available for checkout, please display a success message when the book is successfully checked out.
++ [x] Write a fixture for loading up several books.
 
 
 ## Running the Project Locally

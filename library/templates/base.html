@@ -1,4 +1,6 @@
 {% load static %}<!doctype html>
+{% url 'library:book-list' as book_list %}
+{% url 'library:my-books' as my_books %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,11 +12,34 @@
     {% block css %}
     {% endblock %}
   </head>
-  <body>
+  <body style="padding-top: 60px">
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="{% url 'library:book-list' %}">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link{% if book_list in request.path %} active{% endif %}" href="{{book_list}}"><strong>Books</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if my_books in request.path %} active{% endif %}" href="{{my_books}}"><strong>My Books({{user}})</strong></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    {% endif %}
     <a href="https://github.com/gamifications/library"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
     <div class="container my-4">
       <div class="row justify-content-center">
         <div class="col-md-10 col-sm-12">
+          {% if not user.is_authenticated %}
           <div class="row">
             <div class="col-6">
               <h1 class="logo">
@@ -22,16 +47,11 @@
               </h1>
             </div>
             <div class="col-6 text-right">
-              {% if user.is_authenticated %}
-                <p class="pt-3">
-                    <strong>{{ user.username }}</strong> | <a href="{% url 'logout' %}">Log out</a>
-                </p>
-              {% else %}
                 <a href="{% url 'login' %}" class="btn btn-light" role="button">Log in</a>
                 <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a>
-              {% endif %}
             </div>
           </div>
+          {% endif %}
           <div class="card mb-3">
             <div class="card-body">
               {% for message in messages %}

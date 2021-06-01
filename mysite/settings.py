@@ -129,8 +129,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Custom
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+
+LOGIN_REDIRECT_URL = 'library:book-list'
+LOGOUT_REDIRECT_URL = 'library:book-list'
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
