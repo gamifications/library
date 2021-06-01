@@ -22,9 +22,9 @@
 		    <p class="text-muted"><small>{{ book.summary|truncatechars:50}}</small></p>
 		    <!-- <p class="lead">{{ book.available_copies}}</p> -->
 		    {% if return %}
-		    <a href="{% url 'library:check_in' pk=book.id %}" class="btn btn-danger">Return Book</a>
+		    <a href="{% url 'library:check_in' pk=book.id %}" class="btn btn-danger">Return this Book</a>
 		    {% else %}
-		    <a href="{% url 'library:check_out' pk=book.id %}" class="btn btn-primary">Borrow Book</a>
+		    <a href="{% url 'library:check_out' pk=book.id %}" class="btn btn-primary">Borrow this Book</a>
 		    {% endif %}
 	      </div>
 	    </div>
