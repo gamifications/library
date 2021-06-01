@@ -36,7 +36,7 @@
             <div class="card-header">
               <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link{% if book_list in request.path %} active{% endif %}" href="{{ book_list }}">All Books </a>
+                <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="{{ book_list }}">All Books </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link{% if my_books in request.path %} active{% endif %}" href="{{ my_books }}">My Books({{user}})</a>
